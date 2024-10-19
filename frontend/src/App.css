@@ -1,31 +1,38 @@
-.TopMenu {
-    background-color: green;
-    width: 100%;
-    height: 3rem;
+.aside {
+    display: grid;
+    grid-template-columns: 18% 82%;
+    height: 100vh;
 }
 
 .NavigationArborescent {
     background-color: red;
-    width: 20vw;
-    height: 100vh;
+    height: 100vh; 
+    overflow-y: auto;
+}
+
+.main {
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
 }
 
 .Tabulation {
     background-color: yellowgreen;
-    width: 80vw;
     height: 2rem;
 }
 
 .Route {
-    background-color: orange; 
-    height: 2rem;   
+    background-color: orange;
+    height: 2rem;
 }
 
 .Page {
     background-color: blue;
-    height: 100vh; 
+    flex-grow: 1;
 }
 
-.aside {
-    display: flex;
+.TopMenu {
+    background-color: green;
+    width: 100%;
+    height: 3rem;
 }

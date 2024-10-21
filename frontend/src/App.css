@@ -5,34 +5,36 @@
 }
 
 .NavigationArborescent {
-    background-color: red;
+    background-color: #181818;
     height: 100vh; 
     overflow-y: auto;
 }
 
 .main {
-    background-color: lightgray;
     display: flex;
     flex-direction: column;
 }
 
 .Tabulation {
-    background-color: yellowgreen;
+    background-color: rgb(31,31,31);
+    border-bottom: solid 1px gray;
     height: 2rem;
 }
 
 .Route {
-    background-color: orange;
+    background-color: #302f2f;
+    border-bottom: solid 2px black;
     height: 2rem;
 }
 
 .Page {
-    background-color: blue;
+    background-color: #302f2f;
     flex-grow: 1;
 }
 
 .TopMenu {
-    background-color: green;
+    background-color:#1F1F1F;
+    border-bottom: solid 1px gray;
     width: 100%;
     height: 3rem;
 }

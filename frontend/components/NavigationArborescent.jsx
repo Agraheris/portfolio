@@ -27,7 +27,7 @@ function NavigationArborescent() {
             <li>
               <details open>
                 <summary>
-                  <FontAwesomeIcon icon={faFolderOpen} style={{color: "#FFD43B",}} /> Projets
+                  <FontAwesomeIcon icon={faFolder} style={{color: "#FFD43B",}} /> Projets
                 </summary>
                 <ul>
                   <li><FontAwesomeIcon icon={faFile} /> Spice_odyssey.js</li>

@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Route() {
+function Adress() {
   return (
     <div className='Route'>Route</div>
   )
 }
 
-export default Route
+export default Adress

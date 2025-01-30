@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder, faFolderOpen, faFile } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import './NavigationArborescent.css';
 
 function NavigationArborescent() {
@@ -19,7 +20,7 @@ function NavigationArborescent() {
                 </summary>
                 <ul>
                   <li>
-                    <FontAwesomeIcon icon={faFile} /> Bienvenue.txt
+                    <FontAwesomeIcon icon={faFile} /> <Link to ="/">Bienvenue.txt</Link>
                   </li>
                 </ul>
               </details>
@@ -30,11 +31,11 @@ function NavigationArborescent() {
                   <FontAwesomeIcon icon={faFolder} style={{color: "#FFD43B",}} /> Projets
                 </summary>
                 <ul>
-                  <li><FontAwesomeIcon icon={faFile} /> Spice_odyssey.js</li>
-                  <li><FontAwesomeIcon icon={faFile} /> Moodflix.js</li>
-                  <li><FontAwesomeIcon icon={faFile} /> Adopte_un_geux.js</li>
-                  <li><FontAwesomeIcon icon={faFile} /> Virtuart.js</li>
-                  <li><FontAwesomeIcon icon={faFile} /> Dino_space_survivor.js</li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to ="/spice"> Spice_odyssey.js </Link></li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to ="/moodflix"> Moodflix.js </Link></li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to ="/adopte">Adopte_un_geux.js </Link></li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to ="/virtuart">Virtuart.js </Link></li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to ="/dino">Dino_space_survivor.js </Link></li>
                 </ul>
               </details>
             </li>
@@ -44,8 +45,8 @@ function NavigationArborescent() {
                   <FontAwesomeIcon icon={faFolder} style={{color: "#FFD43B",}} /> Compétences
                 </summary>
                 <ul>
-                  <li><FontAwesomeIcon icon={faFile} /> Frontend.json</li>
-                  <li><FontAwesomeIcon icon={faFile} /> Backend.json</li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to ="/frontend">Frontend.json </Link></li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to="/backend">Backend.json </Link></li>
                 </ul>
               </details>
             </li>
@@ -55,7 +56,7 @@ function NavigationArborescent() {
                   <FontAwesomeIcon icon={faFolder} style={{color: "#FFD43B",}} /> Formation
                 </summary>
                 <ul>
-                  <li><FontAwesomeIcon icon={faFile} /> BootCamp_WildCodeSchool.txt</li>
+                  <li><FontAwesomeIcon icon={faFile} /> <Link to="/wild">BootCamp_WildCodeSchool.txt </Link></li>
                 </ul>
               </details>
             </li>

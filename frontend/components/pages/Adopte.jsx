@@ -2,14 +2,14 @@ import React from "react";
 import Tabulation from "../Tabulation";
 import Adress from "../Adress";
 
-const Page2 = () => {
+const Adopte= () => {
   return (
     <>
       <Tabulation />
-      <Adress />
-      <section> Page 1</section>
+      <Adress adress = "Portfolio > Projets > Adopte_un_geux.js" />
+      <section> Adopte un geux </section>
     </>
   );
 };
 
-export default Page2;
+export default Adopte;

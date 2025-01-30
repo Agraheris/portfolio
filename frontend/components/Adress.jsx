@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Adress() {
+function Adress({adress}) {
   return (
-    <div className='Route'>Route</div>
+    <div className='Route'>{adress}</div>
   )
 }
 

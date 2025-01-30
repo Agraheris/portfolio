@@ -2,15 +2,14 @@ import React from "react";
 import Tabulation from "../Tabulation";
 import Adress from "../Adress";
 
-
-const Page2 = () => {
+const Virtuart= () => {
   return (
     <>
       <Tabulation />
-      <Adress />
-      <Section> Page 2 </Section>
+      <Adress adress = "Portfolio > Projets > Vituart.js" />
+      <section> Virtuart </section>
     </>
   );
 };
 
-export default Page2;
+export default Virtuart;

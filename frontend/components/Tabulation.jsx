@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./Tabulation.css";
 
 const Tabulation = () => {
   const location = useLocation(); // Récupère l'URL actuelle
@@ -7,20 +8,37 @@ const Tabulation = () => {
   const [tabs, setTabs] = useState([]); // Stocke les onglets ouverts
   const [activeTab, setActiveTab] = useState(location.pathname); // Onglet actif par défaut
 
-  // Ajouter un onglet uniquement si l'URL actuelle n'est pas déjà ouverte
-  useEffect(() => {
-    const currentPath = location.pathname;
+  // Fonction pour générer un label d'onglet (ex: "/about" => "ABOUT")
+  const getTabLabel = (path) => {
+    return path === "/" ? "Accueil" : path.replace("/", "").toUpperCase();
+  };
 
-    // Vérifie si l'onglet existe déjà
+  // Ajouter un onglet uniquement si l'URL actuelle n'est pas déjà ouverte
+  const addTabIfNotExist = useCallback(() => {
+    const currentPath = location.pathname;
+    
+    // Vérifier si l'onglet existe déjà
     setTabs((prevTabs) => {
-      if (!prevTabs.some((tab) => tab.path === currentPath)) {
-        return [...prevTabs, { path: currentPath, label: currentPath.replace("/", "").toUpperCase() || "ACCUEIL" }];
+      const tabExists = prevTabs.some((tab) => tab.path === currentPath);
+      if (!tabExists) {
+        const newTab = { path: currentPath, label: getTabLabel(currentPath) };
+        return [...prevTabs, newTab];
       }
       return prevTabs;
     });
 
-    setActiveTab(currentPath); // Mettre à jour l'onglet actif
+    // Assurer que l'onglet actif est mis à jour si nécessaire
+    setActiveTab((prevActiveTab) => {
+      if (prevActiveTab !== currentPath) {
+        return currentPath;
+      }
+      return prevActiveTab;
+    });
   }, [location.pathname]);
+
+  useEffect(() => {
+    addTabIfNotExist();
+  }, [location.pathname, addTabIfNotExist]);
 
   // Changer d'onglet
   const handleTabClick = (path) => {
@@ -32,26 +50,45 @@ const Tabulation = () => {
   const handleCloseTab = (path, event) => {
     event.stopPropagation(); // Empêcher le clic de changer d'onglet
 
-    setTabs((prevTabs) => prevTabs.filter((tab) => tab.path !== path));
-
-    // Si l'onglet fermé est actif, changer d'onglet
-    if (activeTab === path) {
-      const remainingTabs = tabs.filter((tab) => tab.path !== path);
-      if (remainingTabs.length > 0) {
-        navigate(remainingTabs[remainingTabs.length - 1].path); // Aller au dernier onglet ouvert
-      } else {
+    setTabs((prevTabs) => {
+      const newTabs = prevTabs.filter((tab) => tab.path !== path);
+      if (newTabs.length === 0) {
         navigate("/"); // Revenir à l'accueil si plus d'onglets ouverts
+      } else if (activeTab === path) {
+        navigate(newTabs[newTabs.length - 1].path); // Aller au dernier onglet ouvert
       }
-    }
+      return newTabs;
+    });
+  };
+
+  // Déplacer un onglet (Drag & Drop)
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.setData("tabIndex", index);
+  };
+
+  const handleDrop = (e, index) => {
+    e.preventDefault();
+    const draggedTabIndex = e.dataTransfer.getData("tabIndex");
+
+    setTabs((prevTabs) => {
+      const updatedTabs = [...prevTabs];
+      const draggedTab = updatedTabs.splice(draggedTabIndex, 1)[0]; // Retire l'onglet déplacé
+      updatedTabs.splice(index, 0, draggedTab); // Insère à la nouvelle position
+      return updatedTabs;
+    });
   };
 
   return (
     <div className="tab-container">
-      {tabs.map((tab) => (
+      {tabs.map((tab, index) => (
         <div
           key={tab.path}
           className={`tab ${tab.path === activeTab ? "active" : ""}`}
           onClick={() => handleTabClick(tab.path)}
+          draggable
+          onDragStart={(e) => handleDragStart(e, index)}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => handleDrop(e, index)}
         >
           {tab.label}
           <span className="close-btn" onClick={(e) => handleCloseTab(tab.path, e)}>✖</span>
